@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebLearn — Khám phá thành phần website</title>
+<style>
+:root{--blue:#0878e8;--navy:#092d62;--ink:#183153;--muted:#64748b;--line:#d9e6f5;--bg:#f3f8ff}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1120px;margin:auto;padding:22px}
+.topnote{background:#e2efff;border:1px solid #c6ddff;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-size:14px}
+.browser{background:#fff;border:1px solid #d5e2f1;border-radius:18px;overflow:hidden;box-shadow:0 14px 38px #0b3a6c12}
+.chrome{height:42px;background:#edf3fa;display:flex;align-items:center;gap:7px;padding:0 16px;border-bottom:1px solid #dce6f2}
+.dot{width:10px;height:10px;border-radius:50%;background:#ff6259}.dot:nth-child(2){background:#ffc33d}.dot:nth-child(3){background:#2bc66d}.address{margin-left:12px;background:#fff;border-radius:20px;padding:6px 14px;color:#64748b;font-size:12px;flex:1}
+.sitehead{background:linear-gradient(110deg,#063b83,#0878e8);color:white;display:flex;align-items:center;justify-content:space-between;padding:17px 25px;gap:18px;flex-wrap:wrap}
+.brand{font-size:23px;font-weight:800}.brand small{display:block;font-size:11px;font-weight:400;opacity:.85;margin-top:3px}
+nav{display:flex;gap:8px;flex-wrap:wrap}button,.navbtn{cursor:pointer;border:0;font:inherit}
+.navbtn{color:white;background:transparent;padding:9px 12px;border-radius:9px}.navbtn:hover,.navbtn:focus{background:#ffffff26;outline:2px solid #b9ddff}
+.signup{background:#27b9ff;color:#003b75;border-radius:22px;padding:10px 18px;font-weight:bold}
+.hero{background:linear-gradient(120deg,#063a80,#078ee8);color:white;padding:35px 34px;display:grid;grid-template-columns:1.4fr .6fr;align-items:center;gap:20px;min-height:220px}
+.hero h1{font-size:clamp(26px,4vw,40px);margin:0 0 12px}.hero p{max-width:590px;line-height:1.6;color:#e1f3ff}
+.hero .cta{background:white;color:#0668c9;border-radius:22px;padding:12px 19px;font-weight:bold;margin-top:8px}
+.hero-art{font-size:76px;text-align:center;filter:drop-shadow(0 8px 5px #00356b55)}
+.section{padding:25px}.contentgrid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+h2{font-size:22px;margin:0 0 7px}.sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{border:1px solid var(--line);border-radius:13px;padding:15px 10px;text-align:center;background:#fff;box-shadow:0 4px 12px #1b4c7b0b}
+.icon{font-size:35px;margin-bottom:8px}.card h3{font-size:14px;margin:4px 0 8px}.card p{font-size:12px;color:var(--muted);line-height:1.45;min-height:34px}
+.smallbtn{background:var(--blue);color:#fff;border-radius:8px;padding:8px 10px;font-size:12px}
+.newsitem{display:flex;gap:10px;border-bottom:1px solid #e5edf7;padding:12px 0;font-size:13px;line-height:1.4}.newsicon{background:#e4f1ff;border-radius:9px;padding:10px;font-size:22px}
+.formarea{background:#eaf6ff;border-top:1px solid #cfe8ff;border-bottom:1px solid #cfe8ff;display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:25px}
+.formarea p{line-height:1.6;color:#526985}.formbox{background:white;padding:15px;border:1px solid var(--line);border-radius:12px}
+input,select{width:100%;padding:11px;margin-bottom:9px;border:1px solid #d6e3f2;border-radius:8px;font:inherit;font-size:13px}
+.submit{width:100%;background:#0785ed;color:white;padding:11px;border-radius:8px;font-weight:bold}
+footer{background:#082c5d;color:white;padding:22px 26px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px}footer p{opacity:.8;margin-bottom:0}
+.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:20px}
+.legend div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}.legend h3{margin:0 0 8px;font-size:16px}.legend p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.interactive{transition:box-shadow .15s,outline .15s;cursor:pointer;position:relative}
+.interactive:hover{outline:3px solid #ffb547;outline-offset:-3px}
+.interactive.selected{outline:4px solid #ff9f1c;outline-offset:-4px;box-shadow:inset 0 0 0 999px #ffdf8b18}
+.info{margin-top:18px;background:#fff;border:2px solid #b8d9ff;border-radius:14px;padding:18px;display:grid;grid-template-columns:1fr 1.2fr;gap:15px}
+.info h2{color:#075fbd}.tag{display:inline-block;background:#e5f2ff;color:#075fbd;padding:5px 9px;border-radius:20px;font-size:12px;font-weight:bold;margin-bottom:8px}
+.info p{line-height:1.6;margin:5px 0}.code{font-family:Consolas,monospace;background:#0b2344;color:#d7edff;padding:13px;border-radius:9px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}
+@media(max-width:760px){.hero,.contentgrid,.formarea,.info{grid-template-columns:1fr}.hero-art{display:none}.cards{grid-template-columns:repeat(2,1fr)}.legend{grid-template-columns:1fr}nav{gap:2px}.navbtn{padding:8px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topnote"><strong>Hoạt động khám phá:</strong> Hãy bấm vào các khu vực được viền sáng khi rê chuột để tìm hiểu tên, chức năng và ví dụ mã HTML/CSS/JavaScript.</div>
+  <div class="browser">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><div class="address">https://demo-weblearn.local</div></div>
+    <header class="sitehead interactive" data-part="header">
+      <div class="brand">⌘ WebLearn <small>Học lập trình — Kiến tạo tương lai</small></div>
+      <nav class="interactive" data-part="navigation" aria-label="Điều hướng">
+        <button class="navbtn" data-part="navigation">Trang chủ</button><button class="navbtn" data-part="navigation">Giới thiệu</button><button class="navbtn" data-part="navigation">Khóa học</button><button class="navbtn" data-part="navigation">Blog</button><button class="navbtn" data-part="navigation">Liên hệ</button>
+        <button class="signup" data-part="navigation">Đăng ký</button>
+      </nav>
+    </header>
+    <section class="hero interactive" data-part="hero">
+      <div><h1>Khám phá thế giới lập trình</h1><p>Học những kỹ năng công nghệ hiện đại, xây dựng những ý tưởng tuyệt vời của riêng bạn!</p><button class="cta" data-part="button" onclick="showNotice()">Bắt đầu ngay →</button></div>
+      <div class="hero-art" aria-hidden="true">👩‍💻</div>
+    </section>
+    <section class="section interactive" data-part="main">
+      <div class="contentgrid">
+        <div><h2>Các khóa học nổi bật</h2><p class="sub">Lựa chọn khóa học phù hợp với bạn</p>
+          <div class="cards">
+            <article class="card interactive" data-part="card"><div class="icon">🐱</div><h3>Scratch</h3><p>Lập trình cho người mới bắt đầu</p><button class="smallbtn" onclick="showCourse('Scratch')">Xem chi tiết</button></article>
+            <article class="card interactive" data-part="card"><div class="icon">🌐</div><h3>HTML · CSS · JS</h3><p>Xây dựng website cơ bản</p><button class="smallbtn" onclick="showCourse('HTML · CSS · JavaScript')">Xem chi tiết</button></article>
+            <article class="card interactive" data-part="card"><div class="icon">🎮</div><h3>GameMaker</h3><p>Tạo game 2D chuyên nghiệp</p><button class="smallbtn" onclick="showCourse('GameMaker')">Xem chi tiết</button></article>
+            <article class="card interactive" data-part="card"><div class="icon">🐍</div><h3>Python</h3><p>Lập trình Python từ cơ bản</p><button class="smallbtn" onclick="showCourse('Python')">Xem chi tiết</button></article>
+          </div>
+        </div>
+        <aside class="interactive" data-part="sidebar"><h2>Tin tức & Bài viết</h2>
+          <div class="newsitem"><span class="newsicon">💡</span><span><strong>5 mẹo học lập trình hiệu quả</strong><br><small>10/10/2026</small></span></div>
+          <div class="newsitem"><span class="newsicon">🧩</span><span><strong>Tại sao nên học lập trình từ sớm?</strong><br><small>05/10/2026</small></span></div>
+          <div class="newsitem"><span class="newsicon">🛠️</span><span><strong>Công cụ hỗ trợ lập trình hữu ích</strong><br><small>28/09/2026</small></span></div>
+        </aside>
+      </div>
+    </section>
+    <section class="formarea interactive" data-part="form">
+      <div><h2>✉ Đăng ký nhận tư vấn</h2><p>Để lại thông tin, chúng tôi sẽ liên hệ với bạn sớm nhất!</p><p>☎ Hotline: 0123 456 789<br>✉ Email: support@weblearn.vn<br>⌖ Địa chỉ: 123 Đường Công Nghệ, TP.HCM</p></div>
+      <form class="formbox" onsubmit="event.preventDefault();alert('Demo: Biểu mẫu đã được gửi thử!');">
+        <input aria-label="Họ và tên" placeholder="Họ và tên" required><input aria-label="Số điện thoại" placeholder="Số điện thoại" required>
+        <input type="email" aria-label="Email" placeholder="Email" required>
+        <select aria-label="Khóa học quan tâm"><option>Khóa học quan tâm</option><option>Scratch</option><option>HTML · CSS · JavaScript</option><option>GameMaker</option><option>Python</option></select>
+        <button class="submit" type="submit">Gửi thông tin</button>
+      </form>
+    </section>
+    <footer class="interactive" data-part="footer"><div><strong>⌘ WebLearn</strong><p>© 2026 WebLearn. Tất cả quyền được bảo lưu.</p></div><div><strong>Liên kết nhanh</strong><p>Trang chủ　|　Giới thiệu　|　Khóa học　|　Blog</p></div><div><strong>Kết nối với chúng tôi</strong><p>Facebook　▶ YouTube　◎ Mạng xã hội</p></div></footer>
+  </div>
+  <div class="legend">
+    <div><h3 style="color:#d94824">HTML — Tạo cấu trúc</h3><p>Tiêu đề, đoạn văn, hình ảnh, liên kết, nút bấm và các khu vực của trang.</p></div>
+    <div><h3 style="color:#0878e8">CSS — Định dạng giao diện</h3><p>Màu sắc, phông chữ, kích thước, khoảng cách, bố cục và hiệu ứng.</p></div>
+    <div><h3 style="color:#a66a00">JavaScript — Tạo tương tác</h3><p>Xử lý sự kiện bấm nút, kiểm tra biểu mẫu và thay đổi nội dung.</p></div>
+  </div>
+  <section class="info" aria-live="polite">
+    <div><span class="tag" id="tag">BẮT ĐẦU TẠI ĐÂY</span><h2 id="title">Bấm vào một thành phần bất kỳ</h2><p id="desc">Khu vực này sẽ giải thích thành phần bạn chọn, chức năng của nó và ví dụ sử dụng trên website.</p></div>
+    <div><strong>Ví dụ mã HTML</strong><div class="code" id="code">&lt;header&gt;\n  &lt;h1&gt;Tên website&lt;/h1&gt;\n&lt;/header&gt;</div></div>
+  </section>
+</div>
+<script>
+const parts={
+ header:{name:'Header — Phần đầu trang',type:'CẤU TRÚC WEBSITE',desc:'Thường chứa logo, tên website và thông tin nhận diện. Đây là một trong những khu vực đầu tiên người dùng nhìn thấy.',code:'<header>\\n  <h1>WebLearn</h1>\\n  <p>Học lập trình mỗi ngày</p>\\n</header>'},
+ navigation:{name:'Menu điều hướng',type:'ĐIỀU HƯỚNG',desc:'Tập hợp các liên kết giúp người dùng di chuyển đến những trang hoặc khu vực khác nhau của website.',code:'<nav>\\n  <a href=\"index.html\">Trang chủ</a>\\n  <a href=\"courses.html\">Khóa học</a>\\n</nav>'},
+ hero:{name:'Banner / Hero — Khu vực nổi bật',type:'GIỚI THIỆU',desc:'Thường có tiêu đề chính, mô tả ngắn, hình ảnh minh họa và nút kêu gọi hành động để thu hút sự chú ý.',code:'<section class=\"hero\">\\n  <h1>Khám phá lập trình</h1>\\n  <p>Bắt đầu học ngay hôm nay</p>\\n  <button>Bắt đầu ngay</button>\\n</section>'},
+ button:{name:'Button — Nút bấm',type:'THÀNH PHẦN TƯƠNG TÁC',desc:'Cho phép người dùng thực hiện một hành động, chẳng hạn mở nội dung, gửi biểu mẫu hoặc bắt đầu một hoạt động.',code:'<button onclick=\"alert(\\'Xin chào!\\')\">\\n  Bấm vào đây\\n</button>'},
+ main:{name:'Main content — Nội dung chính',type:'NỘI DUNG',desc:'Khu vực trọng tâm của trang, nơi hiển thị các thông tin chính như bài viết, khóa học, sản phẩm hoặc nội dung giới thiệu.',code:'<main>\\n  <h2>Các khóa học nổi bật</h2>\\n  <p>Chọn khóa học phù hợp.</p>\\n</main>'},
+ card:{name:'Card — Thẻ nội dung',type:'THÀNH PHẦN GIAO DIỆN',desc:'Một khối nội dung độc lập, thường kết hợp biểu tượng hoặc hình ảnh, tiêu đề, mô tả và nút thao tác.',code:'<article class=\"card\">\\n  <h3>Khóa học HTML</h3>\\n  <p>Học cách tạo website.</p>\\n  <button>Xem chi tiết</button>\\n</article>'},
+ sidebar:{name:'Sidebar — Thanh bên',type:'NỘI DUNG PHỤ',desc:'Hiển thị thông tin bổ trợ như tin tức mới, liên kết liên quan, mục lục hoặc nội dung được đề xuất.',code:'<aside>\\n  <h2>Tin mới</h2>\\n  <a href=\"#\">Bài viết mới nhất</a>\\n</aside>'},
+ form:{name:'Form — Biểu mẫu',type:'NHẬP DỮ LIỆU',desc:'Cho phép người dùng nhập và gửi thông tin. Website thực tế thường cần thêm bước xử lý dữ liệu ở phía máy chủ.',code:'<form>\\n  <input placeholder=\"Họ và tên\">\\n  <input type=\"email\" placeholder=\"Email\">\\n  <button type=\"submit\">Gửi</button>\\n</form>'},
+ footer:{name:'Footer — Chân trang',type:'THÔNG TIN CUỐI TRANG',desc:'Thường chứa thông tin bản quyền, liên kết nhanh, thông tin liên hệ và các kênh mạng xã hội.',code:'<footer>\\n  <p>© 2026 WebLearn</p>\\n  <a href=\"#contact\">Liên hệ</a>\\n</footer>'}
+};
+function selectPart(key){const d=parts[key];if(!d)return;document.querySelectorAll('.selected').forEach(e=>e.classList.remove('selected'));document.querySelectorAll('[data-part=\"'+key+'\"]').forEach(e=>e.classList.add('selected'));document.getElementById('tag').textContent=d.type;document.getElementById('title').textContent=d.name;document.getElementById('desc').textContent=d.desc;document.getElementById('code').textContent=d.code;}
+document.querySelectorAll('[data-part]').forEach(el=>{el.addEventListener('click',e=>{if(e.target.closest('button')&&e.target.dataset.part!=='navigation')return;const key=el.dataset.part;if(parts[key])selectPart(key);});});
+function showNotice(){selectPart('button');alert('Demo: Nút bấm có thể kích hoạt một hành động!');}
+function showCourse(name){selectPart('card');document.getElementById('desc').textContent='Ví dụ thẻ khóa học được chọn: '+name+'. Một thẻ thường gồm tiêu đề, mô tả và nút xem chi tiết.';}
+</script>
+</body>
+</html>
